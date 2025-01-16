@@ -60,18 +60,29 @@ def sortedCharCountsNum(unformatted_char_counts):
 
     return char_counts
 
-def formatReport(word_count,char_count):
+def printReport(word_count, char_counts, book_path):
+    print(f"------------Begin report of {book_path}------------")
+    print(f"{word_count} words found in the document")
+    #Print count of a specific character on a separate line
+    for char in char_counts:
+        print(f"The \'{char}\' character was found {char_counts[char]} times")
+    print("-------------------End report-------------------")
 
     return
 
 def main():
+    sort_num = False
     book_path = "books/frankenstein.txt"
     book_text = readBook(book_path)
     word_count = countWords(book_text)
     counted_characters = countCharacters(book_text)
 
-    #print(sortedCharCountsAlph(counted_characters))
-    sortedCharCountsNum(counted_characters)
-    #print(f"Counted {word_count} words in the book\n" + formatCharCounts(counted_characters))
+    #Check for sorting type required
+    if sort_num == True:
+        sorted_characters = sortedCharCountsNum(counted_characters)
+    else:
+        sorted_characters = sortedCharCountsAlph(counted_characters)
+
+    printReport(word_count, sorted_characters, book_path)
 
 main()
